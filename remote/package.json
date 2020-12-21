@@ -1,0 +1,36 @@
+{
+  "name": "remote",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run esm && npm run webpack-module && http-server ./dist -a 0.0.0.0 -p 3001 --cors",
+    "esm": "rollup --config rollup.esm.config.js",
+    "webpack-module": ".\\node_modules\\.bin\\webpack --config webpack.config.js"
+  },
+  "author": "Zhengyi Li",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-export-default-from": "^7.5.2",
+    "@babel/plugin-transform-arrow-functions": "^7.12.1",
+    "@babel/plugin-transform-destructuring": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "express": "^4.17.1",
+    "http-server": "^0.11.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-ignore": "^1.0.5",
+    "rollup-plugin-local-resolve": "^1.0.7",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "webpack": "^5.11.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
