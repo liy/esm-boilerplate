@@ -4,8 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 
-module.exports = (env, { mode = "development", hosting = "true" }) => {
-  mode = "development";
+module.exports = (env, { mode = "development" }) => {
   const config = {
     mode,
     entry: {
@@ -16,7 +15,7 @@ module.exports = (env, { mode = "development", hosting = "true" }) => {
       // as "/bundle.js". This is necessary in SPA.
       publicPath: "/",
       filename: "[name].js",
-      // Where to put the final 'compiled' file
+      // Where to put the transpiled file
       path: path.join(__dirname, "dist"),
     },
     externals: {
@@ -32,7 +31,6 @@ module.exports = (env, { mode = "development", hosting = "true" }) => {
           // "pre" ensures eslint check the source file before babel-loader transpiling.
           enforce: "pre",
           test: /\.(ts|js)x?$/,
-          // aoly is specifically excluded, as npm linked package's path does not match with /node_modules/
           exclude: [/node_modules/],
           loader: "eslint-loader",
         },
@@ -46,7 +44,7 @@ module.exports = (env, { mode = "development", hosting = "true" }) => {
           test: /\.s(a|c)ss$/,
           use: [
             // inject css into dom
-            "development" !== mode
+            "development" === mode
               ? {
                   loader: "style-loader",
                   options: {
@@ -88,6 +86,7 @@ module.exports = (env, { mode = "development", hosting = "true" }) => {
       ],
     },
     plugins: [
+      // Use webpack module federation as esm fallback
       new ModuleFederationPlugin({
         name: "app",
         library: { type: "var", name: "app" },
@@ -112,13 +111,13 @@ module.exports = (env, { mode = "development", hosting = "true" }) => {
     //    http://webpack.github.io/docs/configuration.html#devtool
     devtool: "inline-source-map",
 
-    devServer: {
-      host: "0.0.0.0",
-      port: hosting === "true" ? 3000 : 3001,
-      historyApiFallback: true,
-      contentBase: "./dist",
-      hot: true,
-    },
+    // devServer: {
+    //   host: "0.0.0.0",
+    //   port: 3000,
+    //   historyApiFallback: true,
+    //   contentBase: "./dist",
+    //   hot: true,
+    // },
   };
 
   if ("development" === mode) {

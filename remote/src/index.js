@@ -1,7 +1,13 @@
+import styles from "./index.scss";
+
 const HelloWorld = ({ text, onInputUpdate }) => {
   return (
     <div>
-      <input value={text} onChange={onInputUpdate}></input>
+      <input
+        className={styles["input-class"]}
+        value={text}
+        onChange={onInputUpdate}
+      ></input>
     </div>
   );
 };

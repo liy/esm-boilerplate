@@ -1,12 +1,4 @@
-// import React from "react";
-// import ReactDOM from "react-dom";
-
-// import HelloWorld from "http://127.0.0.1:3001/dist/index.esm.js";
-// const HelloWorld = React.lazy(() =>
-//   import("http://127.0.0.1:3001/dist/index.esm.js")
-// );
-
-const HelloWorld = React.lazy(() => import("webpackModule/HelloWorld"));
+const HelloWorld = React.lazy(() => import("http://127.0.0.1:3001/esm.js"));
 
 function Main() {
   const [text, setText] = React.useState("hello");

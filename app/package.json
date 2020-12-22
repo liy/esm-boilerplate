@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run esm && npm run webpack-module && http-server ./dist -a 0.0.0.0 -p 3000 -o",
-    "esm": "babel ./src/index.js --config-file ./esm.babelrc.js --out-file ./dist/app.mjs",
+    "esm": "babel ./src/index.js --config-file ./babel.esm.config.js --out-file ./dist/app.mjs",
     "webpack-module": ".\\node_modules\\.bin\\webpack --config webpack.config.js"
   },
   "author": "Zhengyi Li",
@@ -51,6 +51,7 @@
     "webpack-nomodule-plugin": "^1.0.1"
   },
   "dependencies": {
+    "babel-plugin-transform-rename-import": "^2.3.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   }

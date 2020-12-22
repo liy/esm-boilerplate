@@ -3,7 +3,9 @@ module.exports = {
   plugins: [
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-transform-react-jsx",
-    "@babel/plugin-transform-arrow-functions",
-    "@babel/plugin-transform-destructuring",
+    [
+      "transform-rename-import",
+      { original: "^(.+?)\\.scss$", replacement: "$1.css" },
+    ],
   ],
 };
