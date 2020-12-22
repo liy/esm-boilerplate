@@ -1,5 +1,26 @@
 const HelloWorld = React.lazy(() => import("http://127.0.0.1:3001/esm.js"));
 
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {}
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something went wrong.</h1>;
+    }
+
+    return this.props.children;
+  }
+}
+
 function Main() {
   const [text, setText] = React.useState("hello");
 
@@ -17,12 +38,14 @@ function Main() {
         <b>Sub module</b>
       </div>
       <React.Suspense fallback={<div>Loading...</div>}>
-        <HelloWorld
-          text={text}
-          onInputUpdate={(event) => {
-            setText(event.target.value);
-          }}
-        ></HelloWorld>
+        <ErrorBoundary>
+          <HelloWorld
+            text={text}
+            onInputUpdate={(event) => {
+              setText(event.target.value);
+            }}
+          ></HelloWorld>
+        </ErrorBoundary>
       </React.Suspense>
     </div>
   );

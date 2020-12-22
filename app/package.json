@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run esm && npm run webpack-module && http-server ./dist -a 0.0.0.0 -p 3000 -o",
-    "esm": "babel ./src/index.js --config-file ./babel.esm.config.js --out-file ./dist/app.mjs",
+    "esm": "rollup --config rollup.config.js",
     "webpack-module": ".\\node_modules\\.bin\\webpack --config webpack.config.js"
   },
   "author": "Zhengyi Li",
@@ -20,6 +20,7 @@
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-react": "^7.12.7",
     "@babel/preset-typescript": "^7.12.7",
+    "@rollup/plugin-babel": "^5.2.2",
     "@testing-library/react": "^11.2.1",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -40,6 +41,8 @@
     "postcss-loader": "^4.1.0",
     "postcss-modules": "^3.2.2",
     "prettier": "^2.1.2",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-postcss": "^4.0.0",
     "sass": "^1.29.0",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
