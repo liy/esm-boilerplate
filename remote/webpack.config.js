@@ -20,7 +20,7 @@ module.exports = (env, { mode = "development" }) => {
           loader: "babel-loader",
           exclude: /node_modules/,
           options: {
-            presets: ["@babel/preset-react"],
+            configFile: path.resolve(__dirname, "babel.federation.config.js"),
           },
         },
         {

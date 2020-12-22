@@ -8,11 +8,6 @@ module.exports = {
   output: {
     file: "./dist/esm.js",
     format: "esm",
-    plugins: [
-      getBabelOutputPlugin({
-        configFile: path.resolve(__dirname, "babel.esm.config.js"),
-      }),
-    ],
   },
   external: ["react"],
   plugins: [

@@ -15,14 +15,20 @@ import HelloWorld from "http://127.0.0.1:3001/esm.js";
 
 ## How it works
 
-There are 2 bundles for remote components: esm bundle and webpack module federation bundle.
-
-Consumer application setup scripts tags with correct attributes:
-
 esm script `type` attribute is set to `module` so modern browser knows how to handle it. Older browsers does not know what it is so it will be ignored.
 
 webpack module federation scripts are fallback for older browser. It must also have `nomodule` attribute, so modern browser will ignore these scripts.
 
-## The detail
+## The hacky part
 
-URL in the import statement is replaced with correct webpack module federation path at transpile time. It can be done by `NormalModuleReplacementPlugin` or some search and replace babel plugins.
+URL in the import statement is replaced with correct webpack module federation path at transpile time. It can be done by search and replace plugins in webpack, babel or rollup.
+
+## Pros
+
+1. Smaller bundle size for modern browser.
+2. Future proof code with clean syntax.
+
+## Cons
+
+1. Only works if using latest webpack.
+2. Extra webpack, babel and rollup configs.

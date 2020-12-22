@@ -35,7 +35,7 @@ function Main() {
       </div>
       <br></br>
       <div>
-        <b>Sub module</b>
+        <b>Remote module</b>
       </div>
       <React.Suspense fallback={<div>Loading...</div>}>
         <ErrorBoundary>

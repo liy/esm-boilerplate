@@ -39,6 +39,9 @@ module.exports = (env, { mode = "development" }) => {
           test: /\.(ts|js)x?$/,
           exclude: /node_modules/,
           loader: "babel-loader",
+          options: {
+            configFile: path.resolve(__dirname, "babel.federation.config.js"),
+          },
         },
         {
           test: /\.s(a|c)ss$/,
