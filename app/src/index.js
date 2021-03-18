@@ -1,4 +1,15 @@
-const HelloWorld = React.lazy(() => import("http://127.0.0.1:3001/esm.js"));
+import Title from "./Title";
+
+const BuyModal = React.lazy(() =>
+  import("http://127.0.0.1:3001/esm.mjs").then((module) => {
+    return { default: module.BuyModal };
+  })
+);
+const BuyButton = React.lazy(() =>
+  import("http://127.0.0.1:3001/esm.mjs").then((module) => {
+    return { default: module.BuyButton };
+  })
+);
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -22,16 +33,24 @@ class ErrorBoundary extends React.Component {
 }
 
 function Main() {
-  const [text, setText] = React.useState("hello");
+  const [text, setText] = React.useState("Want a washing machine?");
+  const [modalVisible, setModalVisible] = React.useState(false);
 
   return (
     <div>
+      <Title></Title>
       <div>
-        <b>Root app</b>
         <div>
           This is a rough demo for loading remote react component or library.
         </div>
         <div>{text}</div>
+        <button
+          onClick={() => {
+            setModalVisible(true);
+          }}
+        >
+          Open Modal
+        </button>
       </div>
       <br></br>
       <div>
@@ -39,12 +58,19 @@ function Main() {
       </div>
       <React.Suspense fallback={<div>Loading...</div>}>
         <ErrorBoundary>
-          <HelloWorld
-            text={text}
-            onInputUpdate={(event) => {
-              setText(event.target.value);
+          <BuyButton
+            sku="EWD81483WUKN_WH"
+            onClick={(value) => {
+              setText(value);
             }}
-          ></HelloWorld>
+          ></BuyButton>
+          <BuyModal
+            text="this is a lazy loaded modal component"
+            visible={modalVisible}
+            onClose={() => {
+              setModalVisible(false);
+            }}
+          ></BuyModal>
         </ErrorBoundary>
       </React.Suspense>
     </div>

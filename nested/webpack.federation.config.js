@@ -4,19 +4,26 @@ const { ModuleFederationPlugin } = require("webpack").container;
 
 module.exports = (env, { mode = "development" }) => {
   const config = {
-    entry: "./src/index",
+    entry: "./src/TextBox",
     mode: "development",
     devServer: {
       contentBase: path.join(__dirname, "dist"),
-      port: 3001,
+      port: 3002,
     },
-    output: {
-      publicPath: "http://localhost:3001/",
+    resolve: {
+      extensions: [".ts", ".tsx", ".js", ".json"],
+    },
+    externals: {
+      // react: "AOReact",
+      // "react-dom": "AOReactDOM",
+      react: "React",
+      "react-dom": "ReactDOM",
     },
     module: {
       rules: [
         {
-          test: /\.jsx?$/,
+          // Include ts, tsx, js, and jsx files.
+          test: /\.(ts|js)x?$/,
           loader: "babel-loader",
           exclude: /node_modules/,
           options: {
@@ -48,14 +55,14 @@ module.exports = (env, { mode = "development" }) => {
     },
     plugins: [
       new ModuleFederationPlugin({
-        name: "webpackModule",
-        library: { type: "var", name: "webpackModule" },
-        filename: "webpackModule.js",
+        name: "nestedWebpackModule",
+        library: { type: "var", name: "nestedWebpackModule" },
+        filename: "nestedWebpackModule.js",
         exposes: {
           // expose each component you want
-          "./HelloWorld": "./src/index",
+          "./TextBox": "./src/TextBox",
         },
-        shared: ["react", "react-dom"], // If the consumer application already has these libraries loaded, it won't load them twice
+        shared: ["react"], // If the consumer application already has these libraries loaded, it won't load them twice
       }),
       new MiniCssExtractPlugin({
         filename: "[name].css",

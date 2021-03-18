@@ -8,9 +8,9 @@ import typescript from "@rollup/plugin-typescript";
 import externalGlobals from "rollup-plugin-external-globals";
 
 module.exports = {
-  input: "./src/index.ts",
+  input: "./src/TextBox.tsx",
   output: {
-    file: "./dist/esm.mjs",
+    file: "./dist/nest-module.mjs",
     format: "esm",
   },
   plugins: [

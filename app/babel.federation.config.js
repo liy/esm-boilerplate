@@ -12,8 +12,8 @@ module.exports = {
       {
         rules: [
           {
-            search: "http://127.0.0.1:3001/esm.js",
-            replace: "webpackModule/HelloWorld",
+            search: "http://127.0.0.1:3001/esm.mjs",
+            replace: "webpackModule/components",
           },
         ],
       },

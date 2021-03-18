@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "allowJs": false,
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "outDir": "./dist",
+    // esbuild only support transpiling code to es6, which is sufficient for modern browser.
+    // Extra transpile step can be added to transpile to es5 for IE11.
+    "target": "es6",
+    "jsx": "react"
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["./node_modules/**/*", "dist"]
+}
