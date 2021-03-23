@@ -2,11 +2,14 @@ import Title from "./Title";
 
 const BuyModal = React.lazy(() =>
   import("http://127.0.0.1:3001/esm.mjs").then((module) => {
+    console.log(module);
     return { default: module.BuyModal };
   })
 );
 const BuyButton = React.lazy(() =>
   import("http://127.0.0.1:3001/esm.mjs").then((module) => {
+    console.log(module);
+
     return { default: module.BuyButton };
   })
 );

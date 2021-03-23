@@ -92,19 +92,17 @@ module.exports = (env, { mode = "development" }) => {
       // Use webpack module federation as esm fallback
       new ModuleFederationPlugin({
         name: "app",
-        library: { type: "var", name: "app" },
         remotes: {
-          webpackModule: "webpackModule",
+          webpackModule: "webpackModule@http://localhost:3001/webpackModule.js",
+          nestedWebpackModule: `nestedWebpackModule@http://localhost:3002/nestedWebpackModule.js`,
         },
-        shared: ["react", "react-dom"],
+        shared: {
+          react: { singleton: true },
+          "react-dom": { singleton: true },
+        },
       }),
       new HtmlWebpackPlugin({
-        filename: "index.html",
-        inject: false,
         template: "./src/index.html",
-        env: {
-          target: "dev",
-        },
       }),
     ],
 

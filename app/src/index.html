@@ -1,26 +1,20 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://polyfill.io/v3/polyfill.js?features=Promise"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  </head>
+  <body style="margin: 0">
+    <div id="app"></div>
+    <!-- scripts for IE11 which with no esm support, unfortunately they are also required to use webpack module federation. 
+      Note that nomodue attribute, browsers with esm support will not load these scripts -->
+    <script nomodule src="http://localhost:3001/webpackModule.js"></script>
+    <script nomodule src="http://localhost:3002/nestedWebpackModule.js"></script>
 
-<head>
-  <meta charset="utf-8" />
-  <title></title>
-  <script src="https://polyfill.io/v3/polyfill.js?features=Promise"></script>
-  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-</head>
-
-<body style="margin: 0">
-  <div id="app"></div>
-  <!-- scripts for browsers with no esm support, using webpack federation. Note that nomodue attribute, browsers with esm support will not load these scripts -->
-  <!-- <script nomodule src="http://localhost:3001/webpackModule.js"></script>
-  <script nomodule src="http://localhost:3002/nestedWebpackModule.js"></script> -->
-
-  <!-- <% for (key in htmlWebpackPlugin.files.js) { %>
-    <script nomodule src="<%= htmlWebpackPlugin.files.js[key] %>"></script>
-    <% } %> -->
-
-      <!-- scripts for browsers with esm support, browsers with no esm support will not recognize module type and ignore this script -->
-      <script type="module" src="./app.mjs"></script>
-</body>
-
+    <!-- scripts for browsers with esm support, browsers with no esm support will not recognize module type and ignore this script -->
+    <script type="module" src="./app.mjs"></script>
+  </body>
 </html>
